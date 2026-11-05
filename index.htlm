@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boulangerie Lumière</title>
+  <style>
+    body { font-family: Georgia, serif; margin: 0; background: #fbf6ee; color: #3b2a1e; }
+    header { background: #7a3e1d; color: white; padding: 32px 24px; text-align: center; }
+    h1 { margin: 0; font-size: 2rem; }
+    main { padding: 24px; max-width: 640px; margin: auto; }
+    .produits { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+    .produits li { background: white; border: 1px solid #e6d8c3; border-radius: 8px; padding: 14px; }
+    .produits h3 { margin: 0 0 4px; font-size: 1rem; }
+    .prix { color: #7a3e1d; font-weight: bold; }
+    button { background: #7a3e1d; color: white; border: 0; border-radius: 4px; padding: 8px 14px; cursor: pointer; }
+    button:hover { background: #5a2c13; }
+    #panier { margin-top: 20px; padding: 12px; background: #f1e3cc; border-radius: 6px; }
+    footer { text-align: center; font-size: .85rem; padding: 16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Boulangerie Lumière</h1>
+    <p>Pains au levain et viennoiseries pur beurre, cuits chaque matin.</p>
+  </header>
+  <main>
+    <h2>Nos produits</h2>
+    <ul class="produits">
+      <li><h3>Baguette tradition</h3><p class="prix">1,30 €</p><button data-prix="1.30">Ajouter</button></li>
+      <li><h3>Croissant</h3><p class="prix">1,20 €</p><button data-prix="1.20">Ajouter</button></li>
+      <li><h3>Pain au levain (500 g)</h3><p class="prix">4,50 €</p><button data-prix="4.50">Ajouter</button></li>
+    </ul>
+    <p id="panier">Panier : 0 article</p>
+  </main>
+  <footer><p>Ouvert du mardi au dimanche, 7h – 19h30</p></footer>
+  <script>
+    let nombre = 0, total = 0;
+    const panier = document.getElementById("panier");
+    document.querySelectorAll("button").forEach(function (bouton) {
+      bouton.addEventListener("click", function () {
+        nombre++;
+        total += parseFloat(bouton.dataset.prix);
+        panier.textContent = "Panier : " + nombre + " article" + (nombre > 1 ? "s" : "") +
+          " — " + total.toFixed(2).replace(".", ",") + " €";
+      });
+    });
+  </script>
+</body>
+</html>
